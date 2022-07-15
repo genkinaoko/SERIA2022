@@ -26,6 +26,7 @@ public class Spectrum : MonoBehaviour
         //while (Microphone.GetPosition(null) <= 0) {}
         // 再生開始（録った先から再生、スピーカーから出力するとハウリングします）
         //audio.Play();
+        
     }
 
     // Update is called once per frame
