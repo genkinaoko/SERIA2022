@@ -32,7 +32,8 @@ public class Spectrum : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var spectrum = GetComponent<AudioSource>().GetSpectrumData(1024, 0, FFTWindow.Hamming);
+        var spectrum = GetComponent<AudioSource>().GetSpectrumData(1024, 0, FFTWindow.Rectanguler);
+        var bun = "";
         for (int i = 1; i < spectrum.Length - 1; ++i) {
             Debug.DrawLine(
                     new Vector3(i - 1, spectrum[i] + 10, 0), 
@@ -42,14 +43,21 @@ public class Spectrum : MonoBehaviour
                     new Vector3(i - 1, Mathf.Log(spectrum[i - 1]) + 10, 2), 
                     new Vector3(i, Mathf.Log(spectrum[i]) + 10, 2), 
                     Color.cyan);
+
             Debug.DrawLine(
-                    new Vector3(Mathf.Log(i - 1), spectrum[i - 1] - 10, 1), 
-                    new Vector3(Mathf.Log(i), spectrum[i] - 10, 1), 
+                    new Vector3(Mathf.Log(i - 1), spectrum[i - 1] + 10, 1), 
+                    new Vector3(Mathf.Log(i), spectrum[i] + 10, 1), 
                     Color.green);
             Debug.DrawLine(
                     new Vector3(Mathf.Log(i - 1), Mathf.Log(spectrum[i - 1]), 3), 
                     new Vector3(Mathf.Log(i), Mathf.Log(spectrum[i]), 3), 
                     Color.yellow);
-    }
+            bun = bun + spectrum[i].ToString() + "\n";
+        }
+        if(Input.GetKeyDown(KeyCode.Space)){
+            //Debug.Log(Mathf.Log(spectrum[4000]));
+            //Debug.Log(spectrum.Length);
+            Debug.Log(bun);
+        }
     }
 }
