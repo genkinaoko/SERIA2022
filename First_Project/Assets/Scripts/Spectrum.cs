@@ -15,7 +15,7 @@ public class Spectrum : MonoBehaviour
             string devName = Microphone.devices[0]; // 複数見つかってもとりあえず0番目のマイクを使用
             int minFreq, maxFreq;
             Microphone.GetDeviceCaps(devName, out minFreq, out maxFreq); // 最大最小サンプリング数を得る
-            audio.clip = Microphone.Start(devName, true, 1, minFreq); // 音の大きさを取るだけなので最小サンプリングで十分
+            audio.clip = Microphone.Start(devName, true, 50, 72000); // 音の大きさを取るだけなので最小サンプリングで十分
             audio.Play(); //マイクをオーディオソースとして実行(Play)開始
         }
 
@@ -32,7 +32,7 @@ public class Spectrum : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var spectrum = GetComponent<AudioSource>().GetSpectrumData(1024, 0, FFTWindow.Rectanguler);
+        var spectrum = GetComponent<AudioSource>().GetSpectrumData(1024, 0, FFTWindow.BlackmanHarris);
         var bun = "";
         for (int i = 1; i < spectrum.Length - 1; ++i) {
             Debug.DrawLine(
