@@ -32,7 +32,7 @@ public class Spectrum : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var spectrum = GetComponent<AudioSource>().GetSpectrumData(2048, 0, FFTWindow.BlackmanHarris);
+        var spectrum = GetComponent<AudioSource>().GetSpectrumData(1024, 0, FFTWindow.Hamming);
         var bun = "";
         for (int i = 1; i < spectrum.Length - 1; ++i) {
             Debug.DrawLine(
