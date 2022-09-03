@@ -15,7 +15,11 @@ public class Spectrum : MonoBehaviour
             string devName = Microphone.devices[0]; // 複数見つかってもとりあえず0番目のマイクを使用
             int minFreq, maxFreq;
             Microphone.GetDeviceCaps(devName, out minFreq, out maxFreq); // 最大最小サンプリング数を得る
+<<<<<<< HEAD
             audio.clip = Microphone.Start(devName, true, 1, 44100); // 音の大きさを取るだけなので最小サンプリングで十分
+=======
+            audio.clip = Microphone.Start(devName, true, 10, 44100); // 音の大きさを取るだけなので最小サンプリングで十分
+>>>>>>> 82888b4a0b86657cfa41b77a07aeb78e613df4c4
             audio.Play(); //マイクをオーディオソースとして実行(Play)開始
         }
 
@@ -32,7 +36,11 @@ public class Spectrum : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+<<<<<<< HEAD
         var spectrum = GetComponent<AudioSource>().GetSpectrumData(512, 0, FFTWindow.BlackmanHarris);
+=======
+        var spectrum = GetComponent<AudioSource>().GetSpectrumData(1024, 0, FFTWindow.Hamming);
+>>>>>>> 82888b4a0b86657cfa41b77a07aeb78e613df4c4
         var bun = "";
         for (int i = 1; i < spectrum.Length - 1; ++i) {
             Debug.DrawLine(
@@ -42,7 +50,7 @@ public class Spectrum : MonoBehaviour
             Debug.DrawLine(
                     new Vector3(i - 1, Mathf.Log(spectrum[i - 1]) + 10, 2), 
                     new Vector3(i, Mathf.Log(spectrum[i]) + 10, 2), 
-                    Color.cyan);
+                    Color.black);
 
             Debug.DrawLine(
                     new Vector3(Mathf.Log(i - 1), spectrum[i - 1] + 10, 1), 
